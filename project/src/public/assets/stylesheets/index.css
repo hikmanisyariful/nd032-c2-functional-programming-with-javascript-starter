@@ -11,6 +11,27 @@ header {
   /* header styles */
 }
 
+.rover-nav {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.rover {
+  width: 30%;
+}
+
+.btn-nav {
+  width: 100%;
+  background-color: darkcyan;
+  height: 50px;
+  font-size: 20px;
+}
+
+.btn-nav:hover {
+  background-color: cadetblue;
+}
+
 main {
   flex: 1;
   padding: 20px;
