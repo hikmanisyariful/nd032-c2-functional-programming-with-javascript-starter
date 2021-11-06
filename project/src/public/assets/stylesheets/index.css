@@ -25,7 +25,6 @@ header {
   width: 100%;
   background-color: darkcyan;
   height: 50px;
-  font-size: 20px;
 }
 
 .btn-nav:hover {
@@ -44,16 +43,124 @@ footer {
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
   /* use mobile */
+  body {
+    max-width: 100vw;
+  }
+
+  .rover-nav {
+    max-width: 100vw;
+  }
+
+  .rover {
+    font-size: 5px;
+  }
+
+  .btn-nav {
+    font-size: 15px;
+  }
+
+  main {
+    max-width: 100vw;
+  }
+
+  .main-info {
+    max-width: 100%;
+  }
+
+  .sub-info {
+    max-width: 100%;
+  }
+
+  .img-camera {
+    max-width: 100vw;
+  }
 }
 
 /* -------------------  DESKTOP  -------------------- */
 
 @media (min-width: 1224px) {
   /* use mobile */
+
+  body {
+    max-width: 100vw;
+  }
+
+  .rover-nav {
+    max-width: 100vw;
+  }
+
+  .rover {
+    font-size: 5px;
+  }
+
+  .btn-nav {
+    font-size: 20px;
+    height: 60px;
+  }
+
+  main {
+    max-width: 100vw;
+  }
+
+  .main-info {
+    max-width: 100%;
+  }
+
+  .sub-info {
+    max-width: 100%;
+  }
+
+  .img-camera {
+    max-width: 100vw;
+  }
+
+  .img-frame {
+    width: 1000px;
+    height: 500px;
+  }
 }
 
 /* -------------------  LARGE SCREENS  -------------- */
 
 @media (min-width: 1824px) {
   /* use mobile */
+
+  body {
+    max-width: 100vw;
+  }
+
+  .rover-nav {
+    max-width: 100vw;
+  }
+
+  .rover {
+    font-size: 5px;
+  }
+
+  .btn-nav {
+    font-size: 20px;
+    height: 60px;
+  }
+
+  main {
+    max-width: 100vw;
+  }
+
+  .main-info {
+    max-width: 100%;
+  }
+
+  .sub-info {
+    max-width: 100%;
+  }
+
+  .img-camera {
+    max-width: 100vw;
+  }
+
+  .img-frame {
+    max-width: 1000px;
+    max-height: 500px;
+  }
+}
 }

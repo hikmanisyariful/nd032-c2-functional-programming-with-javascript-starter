@@ -25,7 +25,8 @@ const NavigationRover = state => {
       return `
                 <div class="rover">
                     <button class="btn-nav" type="button" id="${rover}" onclick="handleClick(${rover})">
-                        ${rover}                   
+                       <p>${rover}</p>
+
                     </button>
                 </div>
             `;
@@ -122,13 +123,15 @@ const InfoCamera = data => {
     })
     .map(rover => {
       return `
-            <div>
-              <h3>Camera Name : ${rover.camera["full_name"]}</h3>
-              <p>Landing Date : ${rover.rover.landing_date}</p>
-              <p>Launching Date : ${rover.rover.launch_date}</p>
-              <p>Status : ${rover.rover.status}</p>
-              <iframe width="560" height="315" src="${rover["img_src"]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              <p>Date the photo was taken : ${rover["earth_date"]}</p>
+            <div >
+                <h3>Camera Name : ${rover.camera["full_name"]}</h3>
+                <p>Landing Date : ${rover.rover.landing_date}</p>
+                <p>Launching Date : ${rover.rover.launch_date}</p>
+                <p>Status : ${rover.rover.status}</p>
+                <p>Date the photo was taken : ${rover["earth_date"]}</p>
+                <div class="img-camera">
+                    <iframe class="img-frame" src="${rover["img_src"]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             <div>
             <br></br>
         `;
