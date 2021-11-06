@@ -18,7 +18,8 @@ const render = async (root, state) => {
 };
 
 // create content
-const NavigationRover = rovers => {
+const NavigationRover = state => {
+  const rovers = state.get("rovers");
   return rovers.map(rover => {
     return `
                 <div class="rover">
@@ -36,8 +37,6 @@ const handleClick = button => {
 };
 
 const App = state => {
-  const rovers = state.get("rovers");
-
   return `
         <header>
             <div>
@@ -45,14 +44,13 @@ const App = state => {
                 <h4>Please, choose which rover’s information you want to see</h4>
             <div>
             <nav class="rover-nav">
-                ${NavigationRover(rovers)}
+                ${NavigationRover(state)}
             </nav>
         </header>
         <main>
-            <section>
-                <div>
-                </div>
-            </section>
+            <div class="main-info">
+                ${InformationRover(state)}
+            </div>
         </main>
         <footer></footer>
     `;
@@ -66,6 +64,29 @@ window.addEventListener("load", () => {
 // ------------------------------------------------------  COMPONENTS
 
 // 1. Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
+
+const InformationRover = state => {
+  const cameraEachRover = state.get("cameraEachRover");
+  const roverName = state.get("isRover");
+
+  if (!cameraEachRover || cameraEachRover.length === 0) {
+    return ``;
+  }
+
+  return `
+    <div class="sub-info">
+        <h2>${roverName}</h2>
+        ${JSON.stringify(cameraEachRover)}
+    </div>
+  `;
+};
+
+// const EachCamera = camera => {
+//   return `
+//         <h3>${camera.camera.full_name}</h3>
+//         <
+//     `;
+// };
 
 /*
 const Greeting = name => {
@@ -141,6 +162,8 @@ const getDataRover = roverName => {
 
       const cameraEachRover = data.photos.reduce(getLatesPhotosEachCamera, {});
       console.log("Ini Data", cameraEachRover);
+      const isRover = roverName;
+      updateStore(store, { cameraEachRover, isRover });
     });
 };
 
