@@ -20,15 +20,17 @@ const render = async (root, state) => {
 // create content
 const NavigationRover = state => {
   const rovers = state.get("rovers");
-  return rovers.map(rover => {
-    return `
+  return rovers
+    .map(rover => {
+      return `
                 <div class="rover">
                     <button class="btn-nav" type="button" id="${rover}" onclick="handleClick(${rover})">
                         ${rover}                   
                     </button>
                 </div>
             `;
-  });
+    })
+    .join("");
 };
 
 const handleClick = button => {
@@ -67,6 +69,7 @@ window.addEventListener("load", () => {
 
 const InformationRover = state => {
   const cameraEachRover = state.get("cameraEachRover");
+  const data = Immutable.fromJS(cameraEachRover);
   const roverName = state.get("isRover");
 
   if (!cameraEachRover || cameraEachRover.length === 0) {
@@ -75,18 +78,12 @@ const InformationRover = state => {
 
   return `
     <div class="sub-info">
-        <h2>${roverName}</h2>
-        ${JSON.stringify(cameraEachRover)}
+        <h2>${roverName}'s rover has ${data.size} camera</h2>
+        <p>Here are the last photos taken from each camera :</p>
+        ${InfoCamera(data)}
     </div>
   `;
 };
-
-// const EachCamera = camera => {
-//   return `
-//         <h3>${camera.camera.full_name}</h3>
-//         <
-//     `;
-// };
 
 /*
 const Greeting = name => {
@@ -103,6 +100,41 @@ const Greeting = name => {
 */
 
 // 2. Example of a pure function that renders infomation requested from the backend
+
+const InfoCamera = data => {
+  return data
+    .map(x => {
+      return {
+        camera: x.get("camera"),
+        rover: x.get("rover"),
+        img_src: x.get("img_src"),
+        earth_date: x.get("earth_date")
+      };
+    })
+    .toJS()
+    .map(y => {
+      return {
+        camera: y.camera.toJS(),
+        rover: y.rover.toJS(),
+        img_src: y["img_src"],
+        earth_date: y["earth_date"]
+      };
+    })
+    .map(rover => {
+      return `
+            <div>
+              <h3>Camera Name : ${rover.camera["full_name"]}</h3>
+              <p>Landing Date : ${rover.rover.landing_date}</p>
+              <p>Launching Date : ${rover.rover.launch_date}</p>
+              <p>Status : ${rover.rover.status}</p>
+              <iframe width="560" height="315" src="${rover["img_src"]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <p>Date the photo was taken : ${rover["earth_date"]}</p>
+            <div>
+            <br></br>
+        `;
+    })
+    .join("");
+};
 
 /*
 const ImageOfTheDay = apod => {
@@ -161,7 +193,6 @@ const getDataRover = roverName => {
       };
 
       const cameraEachRover = data.photos.reduce(getLatesPhotosEachCamera, {});
-      console.log("Ini Data", cameraEachRover);
       const isRover = roverName;
       updateStore(store, { cameraEachRover, isRover });
     });
